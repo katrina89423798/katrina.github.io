@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pagina 03</title>
+  <style>
+    canvas{
+        border: 3px solid #7b68b5;
+        background-color: white;
+        display: block;
+        margin: 0 auto;
+
+    }
+
+    ol {
+        margin: 0px auto;
+        text-align: center;
+        font-family: verdana;
+        font-size: 20px;
+        color: #191b38;
+    }
+  </style>
+
+  <script>
+      window.onload=function(){
+        var canvas = document.getElementById("micanvas");
+        var context = canvas.getContext("2d");
+        var pixel = 30;
+
+            var heart = [
+            "  XX   XX  ",
+            " XXXXXXXXX ",
+            "XXXXXXXXXXX",
+            "XXXXXXXXXXX",
+            " XXXXXXXXX ",
+            "  XXXXXXX  ",
+            "   XXXXX   ",
+            "    XXX    ",
+            "     X     "
+            ];
+
+
+    var heartWidth = heart[0].length * pixel;
+    var heartHeight = heart.length * pixel;
+
+    var startX = (canvas.width - heartWidth) / 2;
+    var startY = (canvas.height - heartHeight) / 2;
+
+    for (var fila = 0; fila < heart.length; fila++) {
+
+        for (var columna = 0; columna < heart[fila].length; columna++) {
+
+            if (heart[fila][columna] === "X") {
+
+                context.fillStyle = "#f472b6";
+
+                context.fillRect(
+                    startX + columna * pixel,
+                    startY + fila * pixel,
+                    pixel,
+                    pixel
+                );
+            }
+        }
+    }
+};
+  </script>
+
+
+  </head>
+<body>
+   <canvas id="micanvas" width="800" height="600"></canvas>
+<ol>
+        <a href="../index.html">Regresar al menú</a>
+</ol>
+</body>
+</html>

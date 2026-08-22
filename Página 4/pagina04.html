@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <title>Pagina 04</title>
+   <style>
+    canvas{
+        border: 3px solid #7b68b5;
+        background-color: white;
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
+    ol {
+        margin: 0px auto;
+        text-align: center;
+        font-family: verdana;
+        font-size: 20px;
+        color: #191b38;
+    }
+   </style>
+   <script>
+        var x=Math.random() * 800;
+        var y=Math.random() * 600;
+        // var dx=4;
+        var dy = 2;
+        function drawSnowflake(context, x, y) {
+
+            var pixel = 10;
+
+            var snowflake = [
+                "     X     ",
+                "     X     ",
+                " X   X   X ",
+                "  X  X  X  ",
+                "   XXXXX   ",
+                "XXXXXXXXXXX",
+                "   XXXXX   ",
+                "  X  X  X  ",
+                " X   X   X ",
+                "     X     ",
+                "     X     "
+            ];
+
+            for (var fila = 0; fila < snowflake.length; fila++) {
+
+                for (var columna = 0; columna < snowflake[fila].length; columna++) {
+
+                    if (snowflake[fila][columna] === "X") {
+
+                        context.fillStyle = 'lightblue';
+
+                        context.fillRect(
+                            x + columna * pixel,
+                            y + fila * pixel,
+                            pixel,
+                            pixel
+                        );
+                    }
+                }
+            }
+        }
+
+       
+       function animate(){
+           requestAnimationFrame(animate);
+           var canvas = document.getElementById("micanvas");
+           var context = canvas.getContext("2d");
+           // context.clearRect(0, 0, innerWidth, innerHeight);
+           context.clearRect(0, 0, canvas.width, canvas.height);
+           //console.log('animando');
+           // context.font = '40pt Calibri';
+            // context.fillStyle = 'blue';
+            //context.fillText('Hello World!', x, y);
+
+           // context.fillStyle="#7b68b5";
+           // context.fillRect(x,10,100,100);
+           
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawSnowflake(context, x, y);
+
+            y += dy;
+
+            if (y > canvas.height) {
+                y = -120;
+                x = Math.random() * 700;
+            }
+        }
+
+        window.onload = animate;
+
+   </script>
+   </head>
+ <body>
+    <canvas id="micanvas" width="800" height="600"></canvas>
+<ol>
+        <a href="../index.html">Regresar al menú</a>
+</ol>
+ </body>
+</html>
