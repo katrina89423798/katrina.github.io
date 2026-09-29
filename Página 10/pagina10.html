@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Página 10</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>Dibuja con métodos del API</h1>
+
+<p>
+    Figuras realizadas utilizando Canvas API y JavaScript.
+</p>
+
+
+<!-- ================================================= -->
+<!-- 1. CASITA -->
+<!-- ================================================= -->
+
+<h2>1. Casita</h2>
+
+<canvas
+    id="canvasCasita"
+    width="800"
+    height="500">
+</canvas>
+
+<button onclick="dibujarCasita()">
+    Dibujar Casita
+</button>
+
+<button onclick="limpiarCanvas('canvasCasita')">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+
+<!-- ================================================= -->
+<!-- 2. HONGUITO -->
+<!-- ================================================= -->
+
+<h2>2. Honguito</h2>
+
+<canvas
+    id="canvasHonguito"
+    width="800"
+    height="500">
+</canvas>
+
+<button onclick="dibujarHonguito()">
+    Dibujar Honguito
+</button>
+
+<button onclick="limpiarCanvas('canvasHonguito')">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+<!-- ================================================= -->
+<!-- 3. ESTRELLA -->
+<!-- ================================================= -->
+
+<h2>3. Estrella</h2>
+
+<canvas
+    id="canvasEstrella"
+    width="800"
+    height="500">
+</canvas>
+
+<button onclick="dibujarEstrella()">
+    Dibujar Estrella
+</button>
+
+<button onclick="limpiarCanvas('canvasEstrella')">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+<!-- ================================================= -->
+<!-- 4. LUNA -->
+<!-- ================================================= -->
+
+<h2>4. Luna</h2>
+
+<canvas
+    id="canvasLuna"
+    width="800"
+    height="500">
+</canvas>
+
+<button onclick="dibujarLuna()">
+    Dibujar Luna
+</button>
+
+<button onclick="limpiarCanvas('canvasLuna')">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+<!-- ================================================= -->
+<!-- 5. LIBRE -->
+<!-- ================================================= -->
+
+<h2>5. Libre - Árbol</h2>
+
+<canvas
+    id="canvasLibre"
+    width="800"
+    height="500">
+</canvas>
+
+<button onclick="dibujarLibre()">
+    Dibujar Libre
+</button>
+
+<button onclick="limpiarCanvas('canvasLibre')">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+<!-- ================================================= -->
+<!-- 6. EXTRA - ZORRO CETYS -->
+<!-- ================================================= -->
+
+<h2>Extra: Logo de Zorro CETYS</h2>
+
+<canvas
+    id="canvasZorro"
+    width="800"
+    height="600">
+</canvas>
+
+<button onclick="dibujarZorro()">
+    Dibujar Zorro
+</button>
+
+<button onclick="limpiarZorro()">
+    Limpiar
+</button>
+
+<br>
+<br>
+
+
+<!-- ================================================= -->
+<!-- UTILIDADES DEL CURSO -->
+<!-- ================================================= -->
+
+<script src="utils.js"></script>
+
+
+<script>
+
+    // =================================================
+    // FUNCIÓN GENERAL PARA LIMPIAR UN CANVAS
+    // =================================================
+
+    function limpiarCanvas(id) {
+
+        var canvas =
+            document.getElementById(id);
+
+        var context =
+            canvas.getContext("2d");
+
+        context.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    // =================================================
+    // 1. CASITA
+    // =================================================
+
+    function dibujarCasita() {
+
+        var canvas =
+            document.getElementById("canvasCasita");
+
+        var context =
+            canvas.getContext("2d");
+
+        limpiarCanvas("canvasCasita");
+
+
+        // Fondo pastel
+
+        var gradienteFondo = context.createLinearGradient(
+            0, 0,
+            0, canvas.height
+        );
+
+        gradienteFondo.addColorStop(0, "#FFF8F0");
+        gradienteFondo.addColorStop(1, "#E2F4EC");
+
+        context.fillStyle = gradienteFondo;
+
+        context.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        // Sol
+
+        context.beginPath();
+
+        context.arc(
+            120,
+            100,
+            45,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteSol = context.createLinearGradient(
+            120, 55,
+            120, 145
+        );
+
+        gradienteSol.addColorStop(0, "#FFF1A8");
+        gradienteSol.addColorStop(1, "#FFD1A4");
+
+        context.fillStyle = gradienteSol;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 3;
+
+        context.stroke();
+
+
+        // Casa
+
+        context.beginPath();
+
+        context.rect(
+            250,
+            230,
+            300,
+            180
+        );
+
+        var gradienteCasa = context.createLinearGradient(
+            0, 0,    // arriba
+            0, 500   // abajo
+        );
+
+        gradienteCasa.addColorStop(0.3, "#FFE5B4");
+        gradienteCasa.addColorStop(1, "#E8A6A0");
+
+        context.fillStyle = gradienteCasa;
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 5;
+
+        context.stroke();
+
+
+        // Techo
+
+        context.beginPath();
+
+        context.moveTo(
+            210,
+            230
+        );
+
+        context.lineTo(
+            400,
+            80
+        );
+
+        context.lineTo(
+            590,
+            230
+        );
+
+        context.closePath();
+
+        var gradienteTecho = context.createLinearGradient(
+            400, 80,
+            400, 230
+        );
+
+        gradienteTecho.addColorStop(0, "#F3B6B0");
+        gradienteTecho.addColorStop(1, "#C9798C");
+
+        context.fillStyle = gradienteTecho;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 5;
+
+        context.stroke();
+
+
+        // Puerta
+
+        context.beginPath();
+
+        context.rect(
+            365,
+            310,
+            70,
+            100
+        );
+
+        var gradientePuerta = context.createLinearGradient(
+            365, 310,
+            365, 410
+        );
+
+        gradientePuerta.addColorStop(0, "#D8BFA8");
+        gradientePuerta.addColorStop(1, "#98765D");
+
+        context.fillStyle = gradientePuerta;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 4;
+
+        context.stroke();
+
+
+        // Ventana izquierda
+
+        context.beginPath();
+
+        context.rect(
+            280,
+            275,
+            75,
+            65
+        );
+
+        var gradienteVentana1 = context.createLinearGradient(
+            280, 275,
+            280, 340
+        );
+
+        gradienteVentana1.addColorStop(0, "#D9F5FF");
+        gradienteVentana1.addColorStop(1, "#8FC7D8");
+
+        context.fillStyle = gradienteVentana1;
+
+        context.fill();
+
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 4;
+
+        context.stroke();
+
+
+        // Ventana derecha
+
+        context.beginPath();
+
+        context.rect(
+            445,
+            275,
+            75,
+            65
+        );
+
+        var gradienteVentana2 = context.createLinearGradient(
+            445, 275,
+            445, 340
+        );
+
+        gradienteVentana2.addColorStop(0, "#D9F5FF");
+        gradienteVentana2.addColorStop(1, "#8FC7D8");
+
+        context.fillStyle = gradienteVentana2;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 4;
+
+        context.stroke();
+
+    }
+
+
+    // =================================================
+    // 2. HONGUITO
+    // =================================================
+
+    function dibujarHonguito() {
+
+        var canvas =
+            document.getElementById("canvasHonguito");
+
+        var context =
+            canvas.getContext("2d");
+
+        limpiarCanvas("canvasHonguito");
+
+
+        // Fondo pastel
+        var gradienteFondo = context.createLinearGradient(
+            0, 0,
+            0, canvas.height
+        );
+
+        gradienteFondo.addColorStop(0, "#E2F4EC");
+        gradienteFondo.addColorStop(1, "#E1EDF7");
+
+        context.fillStyle = gradienteFondo;
+
+        context.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        // Tallo
+
+        context.beginPath();
+
+        context.moveTo(
+            300,
+            270
+        );
+
+        context.quadraticCurveTo(
+            400,
+            240,
+            500,
+            270
+        );
+
+        context.lineTo(
+            480,
+            410
+        );
+
+        context.quadraticCurveTo(
+            400,
+            440,
+            320,
+            410
+        );
+
+        context.closePath();
+
+        var gradienteTallo = context.createLinearGradient(
+            0, 270,
+            0, 440
+        );
+
+        gradienteTallo.addColorStop(0, "#FFF0D9");
+        gradienteTallo.addColorStop(1, "#D8BFA8");
+
+        context.fillStyle = gradienteTallo;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 5;
+
+        context.stroke();
+
+
+        // Sombrero
+
+        context.beginPath();
+
+        context.moveTo(
+            220,
+            280
+        );
+
+        context.quadraticCurveTo(
+            240,
+            100,
+            400,
+            100
+        );
+
+        context.quadraticCurveTo(
+            560,
+            100,
+            580,
+            280
+        );
+
+        context.closePath();
+
+        var gradienteSombrero = context.createLinearGradient(
+            0, 100,
+            0, 280
+        );
+
+        gradienteSombrero.addColorStop(0.3, "#E8A6B8");
+        gradienteSombrero.addColorStop(1, "#B36B7C");
+
+        context.fillStyle = gradienteSombrero;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 5;
+
+        context.stroke();
+
+
+        // Punto izquierdo
+
+        context.beginPath();
+
+        context.arc(
+            300,
+            190,
+            22,
+            0,
+            Math.PI * 2
+        );
+
+        var gradientePunto1 = context.createLinearGradient(
+            300, 168,
+            300, 212
+        );
+
+        gradientePunto1.addColorStop(0, "#FFFFFF");
+        gradientePunto1.addColorStop(1, "#F3D98B");
+
+        context.fillStyle = gradientePunto1;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 2;
+
+        context.stroke();
+
+
+        // Punto central
+
+        context.beginPath();
+
+        context.arc(
+            400,
+            150,
+            25,
+            0,
+            Math.PI * 2
+        );
+
+        var gradientePunto2 = context.createLinearGradient(
+            400, 125,
+            400, 175
+        );
+
+        gradientePunto2.addColorStop(0, "#FFFFFF");
+        gradientePunto2.addColorStop(1, "#F3D98B");
+
+        context.fillStyle = gradientePunto2;
+
+        context.fill();
+
+        context.stroke();
+
+
+        // Punto derecho
+
+        context.beginPath();
+
+        context.arc(
+            490,
+            200,
+            22,
+            0,
+            Math.PI * 2
+        );
+
+        var gradientePunto3 = context.createLinearGradient(
+            490, 178,
+            490, 222
+        );
+
+        gradientePunto3.addColorStop(0, "#FFFFFF");
+        gradientePunto3.addColorStop(1, "#F3D98B");
+
+        context.fillStyle = gradientePunto3;
+
+        context.fill();
+
+        context.stroke();
+
+    }
+
+
+    // =================================================
+    // 3. ESTRELLA
+    // =================================================
+
+    function dibujarEstrella() {
+
+        var canvas =
+            document.getElementById("canvasEstrella");
+
+        var context =
+            canvas.getContext("2d");
+
+        limpiarCanvas("canvasEstrella");
+
+
+        // Fondo pastel
+
+        var gradienteFondo = context.createLinearGradient(
+            0, 0,
+            0, canvas.height
+        );
+
+        gradienteFondo.addColorStop(0, "#E1EDF7");
+        gradienteFondo.addColorStop(1, "#E8DFF5");
+
+        context.fillStyle = gradienteFondo;
+
+        context.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        var centroX = 400;
+
+        var centroY = 250;
+
+        var radioExterior = 180;
+
+        var radioInterior = 75;
+
+        var puntos = 10;
+
+
+        context.beginPath();
+
+
+        for (
+            var i = 0;
+            i < puntos;
+            i++
+        ) {
+
+            var angulo =
+                -Math.PI / 2 +
+                i * Math.PI / 5;
+
+            var radio =
+                i % 2 === 0
+                    ? radioExterior
+                    : radioInterior;
+
+            var x =
+                centroX +
+                Math.cos(angulo) * radio;
+
+            var y =
+                centroY +
+                Math.sin(angulo) * radio;
+
+
+            if (i === 0) {
+
+                context.moveTo(
+                    x,
+                    y
+                );
+
+            } else {
+
+                context.lineTo(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+
+
+        context.closePath();
+
+        var gradienteEstrella =
+            context.createLinearGradient(
+                0, 70,
+                0, 430
+            );
+
+        gradienteEstrella.addColorStop(
+            0,
+            "#FFF7B2"
+        );
+
+        gradienteEstrella.addColorStop(
+            1,
+            "#E8A6A0"
+        );
+
+
+        context.fillStyle = gradienteEstrella;
+
+        context.fill();
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 6;
+
+        context.stroke();
+
+    }
+
+
+    // =================================================
+    // 4. LUNA
+    // =================================================
+
+    function dibujarLuna() {
+
+        var canvas =
+            document.getElementById("canvasLuna");
+
+        var context =
+            canvas.getContext("2d");
+
+        limpiarCanvas("canvasLuna");
+
+
+        // Fondo pastel
+
+        var gradienteFondo = context.createLinearGradient(
+            0, 0,
+            0, canvas.height
+        );
+
+        gradienteFondo.addColorStop(
+            0,
+            "#E8DFF5"
+        );
+
+        gradienteFondo.addColorStop(
+            1,
+            "#B9B3D6"
+        );
+
+        context.fillStyle = gradienteFondo;
+
+        context.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        // Luna completa
+
+        context.beginPath();
+
+        context.arc(
+            390,
+            250,
+            150,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteLuna = context.createLinearGradient(
+            0, 100,
+            0, 400
+        );
+
+        gradienteLuna.addColorStop(
+            0,
+            "#FFFFFF"
+        );
+
+        gradienteLuna.addColorStop(
+            0.5,
+            "#FFF1C7"
+        );
+
+        gradienteLuna.addColorStop(
+            1,
+            "#E8CFA0"
+        );
+
+        context.fillStyle = gradienteLuna;
+
+        context.fill();
+
+
+        // Recorte para formar la luna creciente
+
+        context.beginPath();
+
+        context.arc(
+            460,
+            210,
+            145,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = gradienteFondo;
+
+        context.fill();
+
+
+        // Estrella 1
+
+        context.beginPath();
+
+        context.arc(
+            120,
+            100,
+            6,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = "#FFF7E8";
+
+        context.fill();
+
+
+        // Estrella 2
+
+        context.beginPath();
+
+        context.arc(
+            200,
+            180,
+            5,
+            0,
+            Math.PI * 2
+        );
+
+        context.fill();
+
+
+        // Estrella 3
+
+        context.beginPath();
+
+        context.arc(
+            650,
+            110,
+            7,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = "#F3D98B";
+
+        context.fill();
+
+
+        // Estrella 4
+
+        context.beginPath();
+
+        context.arc(
+            700,
+            300,
+            5,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = "#FFF7E8";
+
+        context.fill();
+
+
+        // Estrella 5
+
+        context.beginPath();
+
+        context.arc(
+            130,
+            350,
+            6,
+            0,
+            Math.PI * 2
+        );
+
+        context.fill();
+
+
+        // Estrella 6
+
+        context.beginPath();
+
+        context.arc(
+            600,
+            400,
+            5,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = "#F3D98B";
+
+        context.fill();
+
+    }
+
+
+    // =================================================
+    // 5. LIBRE - ÁRBOL
+    // =================================================
+
+    function dibujarLibre() {
+
+        var canvas =
+            document.getElementById("canvasLibre");
+
+        var context =
+            canvas.getContext("2d");
+
+        limpiarCanvas("canvasLibre");
+
+
+        // Fondo pastel
+        var gradienteFondo = context.createLinearGradient(
+            0, 0,
+            0, canvas.height
+        );
+
+        gradienteFondo.addColorStop(
+            0,
+            "#B9B3D6"
+        );
+
+        gradienteFondo.addColorStop(
+            1,
+            "#E2F4EC"
+        );
+
+        context.fillStyle = gradienteFondo;
+
+        context.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        // Tronco
+
+        context.beginPath();
+
+        context.rect(
+            350,
+            250,
+            100,
+            180
+        );
+
+        var gradienteTronco = context.createLinearGradient(
+            0, 250,
+            0, 430
+        );
+
+        gradienteTronco.addColorStop(
+            0,
+            "#D8BFA8"
+        );
+
+        gradienteTronco.addColorStop(
+            1,
+            "#8F6B52"
+        );
+
+        context.fillStyle = gradienteTronco;
+
+        context.fill();
+
+        context.strokeStyle = "#6F8F78";
+
+        context.lineWidth = 5;
+
+        context.stroke();
+
+
+        // Copa izquierda
+
+        context.beginPath();
+
+        context.arc(
+            330,
+            220,
+            90,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteCopa = context.createLinearGradient(
+            0, 120,
+            0, 310
+        );
+
+        gradienteCopa.addColorStop(
+            0,
+            "#D8F0D8"
+        );
+
+        gradienteCopa.addColorStop(
+            0.5,
+            "#B8D8C0"
+        );
+
+        gradienteCopa.addColorStop(
+            1,
+            "#7EAF8A"
+        );
+
+        context.fillStyle = gradienteCopa;
+
+        context.fill();
+
+        context.strokeStyle = "#6F8F78";
+
+        context.lineWidth = 4;
+
+        context.stroke();
+
+
+        // Copa derecha
+
+        context.beginPath();
+
+        context.arc(
+            470,
+            220,
+            90,
+            0,
+            Math.PI * 2
+        );
+
+        context.fillStyle = gradienteCopa;
+
+        context.fill();
+
+        context.stroke();
+
+
+        // Copa central
+
+        context.beginPath();
+
+        context.arc(
+            400,
+            150,
+            100,
+            0,
+            Math.PI * 2
+        );
+        
+        context.fillStyle = gradienteCopa;
+
+        context.fill();
+
+        context.stroke();
+
+
+        // Fruta izquierda
+
+        context.beginPath();
+
+        context.arc(
+            350,
+            160,
+            12,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteFrutaRosa = context.createLinearGradient(
+            350, 150,
+            350, 170
+        );
+
+        gradienteFrutaRosa.addColorStop(
+            0,
+            "#FFD6D2"
+        );
+
+        gradienteFrutaRosa.addColorStop(
+            1,
+            "#E8A6A0"
+        );
+
+        context.fillStyle = gradienteFrutaRosa;
+
+
+        context.fill();
+
+
+        // Fruta derecha
+
+        context.beginPath();
+
+        context.arc(
+            450,
+            190,
+            15,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteFrutaRosa = context.createLinearGradient(
+            450, 180,
+            450, 200
+        );
+
+        gradienteFrutaRosa.addColorStop(
+            0,
+            "#FFD6D2"
+        );
+
+        gradienteFrutaRosa.addColorStop(
+            1,
+            "#E8A6A0"
+        );
+        context.fillStyle = gradienteFrutaRosa;
+
+        context.fill();
+
+
+        // Fruta central
+
+        context.beginPath();
+
+        context.arc(
+            400,
+            110,
+            13,
+            0,
+            Math.PI * 2
+        );
+
+        var gradienteFrutaAmarilla = context.createLinearGradient(
+            400, 101,
+            400, 119
+        );
+
+        gradienteFrutaAmarilla.addColorStop(
+            0,
+            "#FFF7B2"
+        );
+
+        gradienteFrutaAmarilla.addColorStop(
+            1,
+            "#F3D98B"
+        );
+
+        context.fillStyle = gradienteFrutaAmarilla;
+
+        context.fill();
+
+
+    }
+
+
+    // =================================================
+    // 6. ZORRO CETYS
+    // =================================================
+
+    var canvasZorro =
+        document.getElementById("canvasZorro");
+
+    var contextZorro =
+        canvasZorro.getContext("2d");
+
+
+    // =================================================
+    // FUNCIÓN PARA DIBUJAR POLÍGONOS
+    // =================================================
+
+    function poligono(
+        context,
+        puntos,
+        relleno,
+        borde,
+        grosor
+    ) {
+
+        context.beginPath();
+
+        context.moveTo(
+            puntos[0][0],
+            puntos[0][1]
+        );
+
+
+        for (
+            var i = 1;
+            i < puntos.length;
+            i++
+        ) {
+
+            context.lineTo(
+                puntos[i][0],
+                puntos[i][1]
+            );
+
+        }
+
+
+        context.closePath();
+
+        context.fillStyle = relleno;
+
+        context.fill();
+
+        context.strokeStyle =
+            borde || "#927B70";
+
+        context.lineWidth =
+            grosor || 3;
+
+        context.stroke();
+
+    }
+
+
+    // =================================================
+    // FUNCIÓN PARA DIBUJAR LÍNEAS
+    // =================================================
+
+    function linea(
+        context,
+        x1,
+        y1,
+        x2,
+        y2
+    ) {
+
+        context.beginPath();
+
+        context.moveTo(
+            x1,
+            y1
+        );
+
+        context.lineTo(
+            x2,
+            y2
+        );
+
+        context.strokeStyle = "#927B70";
+
+        context.lineWidth = 4;
+
+        context.stroke();
+
+    }
+
+
+    // =================================================
+    // DIBUJAR ZORRO
+    // =================================================
+
+function dibujarZorro() {
+    contextZorro.clearRect(0, 0, canvasZorro.width, canvasZorro.height);
+
+    // Fondo
+    var gradienteFondo =
+        contextZorro.createLinearGradient(
+            0, 0,
+            0, canvasZorro.height
+        );
+
+    gradienteFondo.addColorStop(
+        0,
+        "#E2F4EC"
+    );
+
+    gradienteFondo.addColorStop(
+        1,
+        "#F5EAD2"
+    );
+
+    contextZorro.fillStyle = gradienteFondo;
+
+    contextZorro.fillRect(0, 0, canvasZorro.width, canvasZorro.height);
+
+    const amarillo = "#FFD21C";
+    const oscuro = "#252525";
+    const blanco = "#FFFFFF";
+    const rosa = "#E8A6B8";
+    const morado = "#C8B9DD";
+    const dorado = "#F3D98B";
+
+
+    // =========================
+    // GRADIENTES
+    // =========================
+
+    var gradienteAmarillo =
+        contextZorro.createLinearGradient(
+            0, 90,
+            0, 375
+        );
+
+    gradienteAmarillo.addColorStop(
+        0,
+        "#FFF27A"
+    );
+
+    gradienteAmarillo.addColorStop(
+        1,
+        "#E8A400"
+    );
+
+
+    var gradienteBlanco =
+        contextZorro.createLinearGradient(
+            0, 215,
+            0, 375
+        );
+
+    gradienteBlanco.addColorStop(
+        0,
+        "#FFFFFF"
+    );
+
+    gradienteBlanco.addColorStop(
+        1,
+        "#E8E8E8"
+    );
+
+
+    var gradienteRosa =
+        contextZorro.createLinearGradient(
+            125, 460,
+            125, 480
+        );
+
+    gradienteRosa.addColorStop(
+        0,
+        "#FFD6E0"
+    );
+
+    gradienteRosa.addColorStop(
+        1,
+        "#E8A6B8"
+    );
+
+
+    var gradienteMorado =
+        contextZorro.createLinearGradient(
+            675, 460,
+            675, 480
+        );
+
+    gradienteMorado.addColorStop(
+        0,
+        "#E8DFF5"
+    );
+
+    gradienteMorado.addColorStop(
+        1,
+        "#C8B9DD"
+    );
+
+
+    var gradienteDorado =
+        contextZorro.createLinearGradient(
+            0, 100,
+            0, 140
+        );
+
+    gradienteDorado.addColorStop(
+        0,
+        "#FFF7B2"
+    );
+
+    gradienteDorado.addColorStop(
+        1,
+        "#F3D98B"
+    );
+
+
+    var gradienteRosaIzquierda =
+    contextZorro.createLinearGradient(
+        0, 285,
+        0, 337
+    );
+
+    gradienteRosaIzquierda.addColorStop(
+        0,
+        "#FFD6E0"
+    );
+
+    gradienteRosaIzquierda.addColorStop(
+        1,
+        "#E8A6B8"
+    );
+
+
+    var gradienteMoradoIzquierda =
+        contextZorro.createLinearGradient(
+            0, 313,
+            0, 337
+        );
+
+    gradienteMoradoIzquierda.addColorStop(
+        0,
+        "#E8DFF5"
+    );
+
+    gradienteMoradoIzquierda.addColorStop(
+        1,
+        "#C8B9DD"
+    );
+
+    var gradienteMoradoDerecha =
+    contextZorro.createLinearGradient(
+        0, 285,
+        0, 337
+    );
+
+    gradienteMoradoDerecha.addColorStop(
+        0,
+        "#E8DFF5"
+    );
+
+    gradienteMoradoDerecha.addColorStop(
+        1,
+        "#C8B9DD"
+    );
+
+
+    var gradienteRosaDerecha =
+        contextZorro.createLinearGradient(
+            0, 313,
+            0, 337
+        );
+
+    gradienteRosaDerecha.addColorStop(
+        0,
+        "#FFD6E0"
+    );
+
+    gradienteRosaDerecha.addColorStop(
+        1,
+        "#E8A6B8"
+    );
+
+    // =========================
+    // DETALLES DECORATIVOS
+    // =========================
+
+    // Estrellas
+    function estrella(x, y, radio, color) {
+        contextZorro.beginPath();
+
+        for (let i = 0; i < 10; i++) {
+            const angulo = -Math.PI / 2 + i * Math.PI / 5;
+            const r = i % 2 === 0 ? radio : radio * 0.45;
+
+            const px = x + Math.cos(angulo) * r;
+            const py = y + Math.sin(angulo) * r;
+
+            if (i === 0) {
+                contextZorro.moveTo(px, py);
+            } else {
+                contextZorro.lineTo(px, py);
+            }
+        }
+
+        contextZorro.closePath();
+        contextZorro.fillStyle = color;
+        contextZorro.fill();
+        contextZorro.strokeStyle = oscuro;
+        contextZorro.lineWidth = 2;
+        contextZorro.stroke();
+    }
+
+    estrella(120, 120, 20, gradienteDorado);
+    estrella(680, 120, 20, gradienteDorado);
+    estrella(125, 470, 16, gradienteRosa);
+    estrella(675, 470, 16, gradienteMorado);
+
+    // Pequeños destellos
+    function destello(x, y, tamano) {
+        contextZorro.beginPath();
+        contextZorro.moveTo(x, y - tamano);
+        contextZorro.lineTo(x + tamano * 0.25, y - tamano * 0.25);
+        contextZorro.lineTo(x + tamano, y);
+        contextZorro.lineTo(x + tamano * 0.25, y + tamano * 0.25);
+        contextZorro.lineTo(x, y + tamano);
+        contextZorro.lineTo(x - tamano * 0.25, y + tamano * 0.25);
+        contextZorro.lineTo(x - tamano, y);
+        contextZorro.lineTo(x - tamano * 0.25, y - tamano * 0.25);
+        contextZorro.closePath();
+
+        contextZorro.fillStyle = "#FFF1C7";
+        contextZorro.fill();
+        contextZorro.strokeStyle = oscuro;
+        contextZorro.lineWidth = 1.5;
+        contextZorro.stroke();
+    }
+
+    destello(175, 180, 10);
+    destello(625, 180, 10);
+
+    // =========================
+    // LOGO DEL ZORRO CETYS
+    // =========================
+
+    // Contorno exterior de la cabeza
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(300, 150);
+    contextZorro.lineTo(250, 70);
+    contextZorro.lineTo(255, 225);
+
+    contextZorro.lineTo(315, 320);
+    contextZorro.lineTo(400, 410);
+
+    contextZorro.lineTo(485, 320);
+    contextZorro.lineTo(545, 225);
+
+    contextZorro.lineTo(550, 70);
+    contextZorro.lineTo(500, 150);
+
+    contextZorro.lineTo(450, 115);
+    contextZorro.lineTo(400, 105);
+    contextZorro.lineTo(350, 115);
+
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = oscuro;
+    contextZorro.fill();
+
+    // =========================
+    // PARTE AMARILLA PRINCIPAL
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(302, 155);
+    contextZorro.lineTo(263, 90);
+    contextZorro.lineTo(270, 215);
+
+    contextZorro.lineTo(320, 285);
+    contextZorro.lineTo(400, 375);
+
+    contextZorro.lineTo(480, 285);
+    contextZorro.lineTo(530, 215);
+
+    contextZorro.lineTo(537, 90);
+    contextZorro.lineTo(498, 155);
+
+    contextZorro.lineTo(450, 125);
+    contextZorro.lineTo(400, 115);
+    contextZorro.lineTo(350, 125);
+
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = gradienteAmarillo;
+    contextZorro.fill();
+
+    // =========================
+    // OREJAS INTERIORES OSCURAS
+    // =========================
+
+    contextZorro.beginPath();
+    contextZorro.moveTo(270, 90);
+    contextZorro.lineTo(285, 185);
+    contextZorro.lineTo(325, 145);
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = oscuro;
+    contextZorro.fill();
+
+    contextZorro.beginPath();
+    contextZorro.moveTo(530, 90);
+    contextZorro.lineTo(515, 185);
+    contextZorro.lineTo(475, 145);
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = oscuro;
+    contextZorro.fill();
+
+    // =========================
+    // LADO IZQUIERDO BLANCO
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(275, 215);
+    contextZorro.lineTo(320, 285);
+    contextZorro.lineTo(400, 375);
+
+    contextZorro.lineTo(385, 265);
+    contextZorro.lineTo(345, 220);
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = gradienteBlanco;
+    contextZorro.fill();
+
+    // =========================
+    // LADO DERECHO BLANCO
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(525, 215);
+    contextZorro.lineTo(480, 285);
+    contextZorro.lineTo(400, 375);
+
+    contextZorro.lineTo(415, 265);
+    contextZorro.lineTo(455, 220);
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = gradienteBlanco;
+    contextZorro.fill();
+
+    // =========================
+    // FORMA CENTRAL DE LA CARA
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(350, 145);
+    contextZorro.lineTo(400, 120);
+    contextZorro.lineTo(450, 145);
+
+    contextZorro.lineTo(425, 220);
+    contextZorro.lineTo(400, 285);
+    contextZorro.lineTo(375, 220);
+
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = gradienteAmarillo;
+    contextZorro.fill();
+
+    // =========================
+    // OJOS / LÍNEAS DE LA CARA
+    // =========================
+
+    contextZorro.beginPath();
+
+    // Ojo izquierdo
+    contextZorro.moveTo(315, 205);
+    contextZorro.lineTo(350, 225);
+    contextZorro.lineTo(375, 250);
+
+    // Ojo derecho
+    contextZorro.moveTo(485, 205);
+    contextZorro.lineTo(450, 225);
+    contextZorro.lineTo(425, 250);
+
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 7;
+    contextZorro.lineCap = "round";
+    contextZorro.stroke();
+
+    // =========================
+    // NARIZ / PUNTA CENTRAL
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(375, 250);
+    contextZorro.lineTo(400, 280);
+    contextZorro.lineTo(425, 250);
+    contextZorro.lineTo(400, 265);
+    contextZorro.closePath();
+
+    contextZorro.fillStyle = oscuro;
+    contextZorro.fill();
+
+    // =========================
+    // LÍNEAS CENTRALES
+    // =========================
+
+    contextZorro.beginPath();
+
+    contextZorro.moveTo(400, 265);
+    contextZorro.lineTo(400, 350);
+
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 6;
+    contextZorro.stroke();
+
+    // =========================
+    // DETALLES EXTRA
+    // =========================
+
+    // Mariposa izquierda
+    contextZorro.beginPath();
+    contextZorro.arc(185, 300, 15, 0, Math.PI * 2);
+    contextZorro.arc(215, 300, 15, 0, Math.PI * 2);
+    contextZorro.fillStyle = gradienteRosaIzquierda;
+    contextZorro.fill();
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 2;
+    contextZorro.stroke();
+
+    contextZorro.beginPath();
+    contextZorro.arc(185, 325, 12, 0, Math.PI * 2);
+    contextZorro.arc(215, 325, 12, 0, Math.PI * 2);
+    contextZorro.fillStyle = gradienteMoradoIzquierda;
+    contextZorro.fill();
+    contextZorro.stroke();
+
+    contextZorro.beginPath();
+    contextZorro.moveTo(200, 292);
+    contextZorro.lineTo(200, 335);
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 4;
+    contextZorro.stroke();
+
+    // Mariposa derecha
+    contextZorro.beginPath();
+    contextZorro.arc(585, 300, 15, 0, Math.PI * 2);
+    contextZorro.arc(615, 300, 15, 0, Math.PI * 2);
+    contextZorro.fillStyle = gradienteMoradoDerecha;
+    contextZorro.fill();
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 2;
+    contextZorro.stroke();
+
+    contextZorro.beginPath();
+    contextZorro.arc(585, 325, 12, 0, Math.PI * 2);
+    contextZorro.arc(615, 325, 12, 0, Math.PI * 2);
+    contextZorro.fillStyle = gradienteRosaDerecha;
+    contextZorro.fill();
+    contextZorro.stroke();
+
+    contextZorro.beginPath();
+    contextZorro.moveTo(600, 292);
+    contextZorro.lineTo(600, 335);
+    contextZorro.strokeStyle = oscuro;
+    contextZorro.lineWidth = 4;
+    contextZorro.stroke();
+
+    // Texto
+    contextZorro.font = "bold 24px Verdana";
+    contextZorro.textAlign = "center";
+    contextZorro.fillStyle = oscuro;
+    contextZorro.fillText("CETYS", 400, 470);
+
+    contextZorro.font = "16px Verdana";
+    contextZorro.fillStyle = "#6B625D";
+    contextZorro.fillText("Zorro CETYS", 400, 500);
+}
+
+
+    // =================================================
+    // LIMPIAR ZORRO
+    // =================================================
+
+    function limpiarZorro() {
+
+        contextZorro.clearRect(
+            0,
+            0,
+            canvasZorro.width,
+            canvasZorro.height
+        );
+
+    }
+
+
+    // =================================================
+    // DIBUJAR TODO AL CARGAR
+    // =================================================
+
+    window.onload = function() {
+
+        dibujarCasita();
+
+        dibujarHonguito();
+
+        dibujarEstrella();
+
+        dibujarLuna();
+
+        dibujarLibre();
+
+        dibujarZorro();
+
+    };
+
+</script>
+    <ol>
+        <br>
+        <a href="../index.html">Regresar al menú</a>
+    </ol>
+</body>
+
+</html>
