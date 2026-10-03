@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Drawing App</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+<div id="toolbar">
+
+  <!-- =========================
+       COLORES
+       ========================= -->
+
+  <div class="tool-row colors-row">
+
+    <span>Colores:</span>
+
+    <button class="color"
+            data-color="white"
+            style="background: white;"></button>
+
+    <button class="color"
+            data-color="black"
+            style="background: black;"></button>
+
+    <button class="color"
+            data-color="red"
+            style="background: red;"></button>
+
+    <button class="color"
+            data-color="blue"
+            style="background: blue;"></button>
+
+    <button class="color"
+            data-color="green"
+            style="background: green;"></button>
+
+    <button class="color"
+            data-color="orange"
+            style="background: orange;"></button>
+
+    <button class="color"
+            data-color="yellow"
+            style="background: yellow;"></button>
+
+    <button class="color"
+            data-color="pink"
+            style="background: pink;"></button>
+
+    <button class="color"
+            data-color="plum"
+            style="background: plum;"></button>
+
+    <button class="color"
+            data-color="lightblue"
+            style="background: lightblue;"></button>
+
+  </div>
+
+
+  <!-- =========================
+       GROSOR DE LA PLUMA
+       ========================= -->
+
+  <div class="tool-row">
+
+    <span>Grosor:</span>
+
+    <input
+      type="range"
+      id="brushSize"
+      min="1"
+      max="30"
+      value="5"
+    >
+
+    <span id="brushSizeValue">5 px</span>
+
+    <button id="brushButton">
+      Pluma
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       BORRADOR
+       ========================= -->
+
+  <div class="tool-row">
+
+    <span>Borrador:</span>
+
+    <input
+      type="range"
+      id="eraserSize"
+      min="5"
+      max="50"
+      value="15"
+    >
+
+    <span id="eraserSizeValue">15 px</span>
+
+    <button id="eraserButton">
+      Borrador
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       BORRAR TODO
+       ========================= -->
+
+  <div class="tool-row">
+
+    <button id="clear">
+      Borrar todo
+    </button>
+
+  </div>
+
+</div>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <aside>Click and draw with the mouse.</aside>
+    
+    <script src="utils.js"></script>
+    <script>
+    window.onload = function () {
+      var canvas = document.getElementById('canvas'),
+          context = canvas.getContext('2d'),
+          mouse = utils.captureMouse(canvas);
+
+        // =========================
+        // Configuración inicial
+        // =========================
+
+        var currentColor = "black";
+        var brushSize = 5;
+        var eraserSize = 15;
+
+        context.strokeStyle = currentColor;
+        context.lineWidth = brushSize;
+        context.lineCap = "round";
+        context.lineJoin = "round";
+
+        // =========================
+        // Cambiar color
+        // =========================
+
+        var colors = document.querySelectorAll('.color');
+
+        colors.forEach(function (button) {
+
+          button.addEventListener('click', function () {
+
+            currentColor = this.dataset.color;
+
+            context.globalCompositeOperation = "source-over";
+
+            context.strokeStyle = currentColor;
+            context.lineWidth = brushSize;
+
+          });
+
+        });
+
+        // =========================
+        // Grosor de la pluma
+        // =========================
+
+        var brushSlider = document.getElementById('brushSize');
+        var brushSizeValue =
+          document.getElementById('brushSizeValue');
+
+        brushSlider.addEventListener('input', function () {
+
+          brushSize = Number(this.value);
+
+          context.lineWidth = brushSize;
+
+          brushSizeValue.textContent =
+            brushSize + " px";
+
+        });
+
+        // =========================
+        // Tamaño del borrador
+        // =========================
+
+        var eraserSlider =
+          document.getElementById('eraserSize');
+
+        var eraserSizeValue =
+          document.getElementById('eraserSizeValue');
+
+        eraserSlider.addEventListener('input', function () {
+
+          eraserSize = Number(this.value);
+
+          eraserSizeValue.textContent =
+            eraserSize + " px";
+
+        });
+
+                // =========================
+        // Pluma
+        // =========================
+
+        document.getElementById('brushButton')
+          .addEventListener('click', function () {
+
+            context.globalCompositeOperation =
+              "source-over";
+
+            context.strokeStyle = currentColor;
+
+            context.lineWidth = brushSize;
+
+          });
+
+
+        // =========================
+        // Borrador
+        // =========================
+
+        document.getElementById('eraserButton')
+          .addEventListener('click', function () {
+
+            context.globalCompositeOperation =
+              "destination-out";
+
+            context.lineWidth = eraserSize;
+
+          });
+
+
+        // =========================
+        // Dibujar
+        // =========================
+
+        canvas.addEventListener('mousedown', function () {
+
+          context.beginPath();
+
+          context.moveTo(mouse.x, mouse.y);
+
+          canvas.addEventListener(
+            'mousemove',
+            onMouseMove,
+            false
+          );
+
+        }, false);
+
+
+        canvas.addEventListener('mouseup', function () {
+
+          canvas.removeEventListener(
+            'mousemove',
+            onMouseMove,
+            false
+          );
+
+        }, false);
+
+
+        canvas.addEventListener('mouseleave', function () {
+
+          canvas.removeEventListener(
+            'mousemove',
+            onMouseMove,
+            false
+          );
+
+        }, false);
+
+
+        function onMouseMove() {
+
+          context.lineTo(mouse.x, mouse.y);
+
+          context.stroke();
+
+        }
+
+
+        // =========================
+        // Borrar todo
+        // =========================
+
+        document.getElementById('clear')
+          .addEventListener('click', function () {
+
+            context.clearRect(
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            );
+
+          });
+
+      };    
+    </script>
+        <br>
+        <div class="back-menu">
+        <a href="../index.html">Regresar al menú</a>
+        </div>
+  </body>
+</html>
