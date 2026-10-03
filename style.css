@@ -346,7 +346,7 @@ button:hover {
   transform: translateY(-2px);
 
   box-shadow:
-    0 8px 18px rgba(110, 95px, 155, 0.18);
+    0 8px 18px rgba(110, 95, 155, 0.18);
 }
 
 .back-menu a:active {
