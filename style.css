@@ -299,3 +299,132 @@ button:hover {
   box-shadow:
     0 8px 18px rgba(110, 95, 155, 0.2);
 }
+
+/* =========================
+   BOTON REGRESAR AL MENU
+   ========================= */
+
+.back-menu a {
+  display: block;
+
+  width: 420px;
+  max-width: 80%;
+  margin: 0 auto;
+
+  padding: 10px 22px;
+
+  background: linear-gradient(
+    135deg,
+    #eee8fa,
+    #ddd6f2
+  );
+
+  color: #777093;
+
+  text-decoration: none;
+  font-size: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 12px rgba(110, 95, 155, 0.12);
+
+  transition: 0.2s ease;
+}
+
+.back-menu a:hover {
+
+  color: #6f6796;
+
+  background: linear-gradient(
+    135deg,
+    #e5def5,
+    #d3c9eb
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px rgba(110, 95px, 155, 0.18);
+}
+
+.back-menu a:active {
+  transform: translateY(0);
+}
+
+
+img {
+    display: block;
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+    margin: 25px auto;
+
+    border-radius: 22px;
+
+    border: 5px solid rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        0 12px 30px rgba(105, 93, 150, 0.18),
+        0 3px 8px rgba(105, 93, 150, 0.10);
+
+    transition: 0.25s ease;
+}
+
+img:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 16px 35px rgba(105, 93, 150, 0.22),
+        0 4px 10px rgba(105, 93, 150, 0.12);
+}
+
+/* =========================
+   MENU DE ACTIVIDADES
+   ========================= */
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 25px auto;
+}
+
+.menu-links a {
+    display: block;
+    width: 420px;
+    max-width: 80%;
+
+    padding: 11px 20px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    color: #6A6AA1;
+    font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 12px rgba(110, 95, 155, 0.12);
+
+    transition: 0.2s ease;
+}
+
+.menu-links a:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #7b68b5;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(110, 95, 155, 0.18);
+}
+
+.menu-links a:active {
+    transform: translateY(0);
+}
