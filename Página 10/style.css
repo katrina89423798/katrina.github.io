@@ -299,3 +299,86 @@ button:hover {
   box-shadow:
     0 8px 18px rgba(110, 95, 155, 0.2);
 }
+
+/* =========================
+   BOTON REGRESAR AL MENU
+   ========================= */
+
+.back-menu {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.back-menu a {
+  display: inline-block;
+  padding: 9px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #eee8fa,
+    #ddd6f2
+  );
+
+  color: #777093;
+
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: normal;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 12px rgba(110, 95, 155, 0.12);
+
+  transition: 0.2s ease;
+}
+
+.back-menu a {
+  display: block;
+
+  width: 420px;
+  max-width: 80%;
+  margin: 0 auto;
+
+  padding: 10px 22px;
+
+  background: linear-gradient(
+    135deg,
+    #eee8fa,
+    #ddd6f2
+  );
+
+  color: #777093;
+
+  text-decoration: none;
+  font-size: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+
+  box-shadow:
+    0 5px 12px rgba(110, 95, 155, 0.12);
+
+  transition: 0.2s ease;
+}
+
+.back-menu a:hover {
+
+  color: #6f6796;
+
+  background: linear-gradient(
+    135deg,
+    #e5def5,
+    #d3c9eb
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 18px rgba(110, 95px, 155, 0.18);
+}
+
+.back-menu a:active {
+  transform: translateY(0);
+}
