@@ -1,0 +1,183 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Página 12</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Simulación de reloj</h1>
+
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <button id="botonPausa">Pausar</button>
+
+    <script src="utils.js"></script>
+
+    <script>
+
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        // Velocidades de rotación
+        var vr1 = 0.0002;  // horas
+        var vr2 = 0.004;   // minutos
+        var vr3 = 0.24;    // segundos
+
+        var pausado = false;
+
+        // Ángulos iniciales
+        var angulo1 = 0;
+        var angulo2 = 0;
+        var angulo3 = 0;
+
+        function dibujarReloj() {
+
+            // Limpiar canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Centro del reloj
+            var centroX = canvas.width / 2;
+            var centroY = canvas.height / 2;
+            var radio = 220;
+
+            // Fondo del reloj
+            context.beginPath();
+            context.arc(centroX, centroY, radio, 0, Math.PI * 2);
+            context.fillStyle = "#faf8ff";
+            context.fill();
+
+            context.strokeStyle = "#777093";
+            context.lineWidth = 6;
+            context.stroke();
+
+            // Números del reloj
+            context.fillStyle = "#68617f";
+            context.font = "bold 28px Verdana";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+
+            for (var i = 1; i <= 12; i++) {
+
+                var anguloNumero = (i * Math.PI * 2 / 12) - Math.PI / 2;
+
+                var x = centroX + Math.cos(anguloNumero) * 175;
+                var y = centroY + Math.sin(anguloNumero) * 175;
+
+                context.fillText(i, x, y);
+            }
+
+            // Marcas de los minutos
+            for (var i = 0; i < 60; i++) {
+
+                var anguloMarca = (i * Math.PI * 2 / 60) - Math.PI / 2;
+
+                var x1 = centroX + Math.cos(anguloMarca) * 200;
+                var y1 = centroY + Math.sin(anguloMarca) * 200;
+
+                var x2 = centroX + Math.cos(anguloMarca) * 210;
+                var y2 = centroY + Math.sin(anguloMarca) * 210;
+
+                context.beginPath();
+                context.moveTo(x1, y1);
+                context.lineTo(x2, y2);
+
+                context.strokeStyle = "#aaa2c7";
+                context.lineWidth = 2;
+                context.stroke();
+            }
+
+            // MANECILLA DE HORAS
+            dibujarManecilla(
+                angulo1,
+                100,
+                10,
+                "#6f6796"
+            );
+
+            // MANECILLA DE MINUTOS
+            dibujarManecilla(
+                angulo2,
+                145,
+                7,
+                "#8274a9"
+            );
+
+            // MANECILLA DE SEGUNDOS
+            dibujarManecilla(
+                angulo3,
+                175,
+                3,
+                "#a58dcc"
+            );
+
+            // Centro
+            context.beginPath();
+            context.arc(centroX, centroY, 9, 0, Math.PI * 2);
+            context.fillStyle = "#6f6796";
+            context.fill();
+
+            // Aumentar los ángulos según su velocidad
+            if (!pausado) {
+                angulo1 += vr1;
+                angulo2 += vr2;
+                angulo3 += vr3;
+            }
+
+            requestAnimationFrame(dibujarReloj);
+        }
+
+
+        // Función para dibujar cada manecilla
+        function dibujarManecilla(angulo, longitud, grosor, color) {
+
+            var centroX = canvas.width / 2;
+            var centroY = canvas.height / 2;
+
+            context.save();
+
+            context.translate(centroX, centroY);
+
+            // Restamos PI/2 para que empiece apuntando hacia arriba
+            context.rotate(angulo - Math.PI / 2);
+
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(0, -longitud);
+
+            context.strokeStyle = color;
+            context.lineWidth = grosor;
+            context.lineCap = "round";
+            context.stroke();
+
+            context.restore();
+        }
+
+
+        var botonPausa = document.getElementById("botonPausa");
+
+        botonPausa.addEventListener("click", function() {
+
+            pausado = !pausado;
+
+            if (pausado) {
+                botonPausa.textContent = "Continuar";
+            } else {
+                botonPausa.textContent = "Pausar";
+            }
+
+        });
+
+        // Iniciar animación
+        dibujarReloj();
+
+    </script>
+
+    <div class="back-menu">
+        <a href="../index.html">Regresar al menú</a>
+    </div>
+
+</body>
+</html>
