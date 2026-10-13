@@ -1,0 +1,171 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Página 13</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Nave personalizada</h1>
+    <canvas id="canvas" width="1200" height="600"></canvas>
+
+    <div class="controles">
+        <p>← → Girar la nave</p>
+        <p>↑ Acelerar y activar los motores</p>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="ship.js"></script>
+
+    <script>
+    window.onload = function () {
+
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        // Imagen de fondo espacial
+        var fondo = new Image();
+        fondo.src = "fondo-espacial.png";
+
+        var ax = 0;
+        var ay = 0;
+        
+        var ship = new Navecita();
+
+        var vr = 0;
+        var vx = 0;
+        var vy = 0;
+        var thrust = 0;
+        var friction = 0.97;
+
+        ship.x = canvas.width / 2;
+        ship.y = canvas.height / 2;
+
+        // Estrellas del espacio
+        var estrellas = [];
+
+        for (var i = 0; i < 100; i++) {
+            estrellas.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radio: Math.random() * 2 + 1
+            });
+        }
+
+        // Control del teclado
+        window.addEventListener("keydown", function (event) {
+
+            switch (event.keyCode) {
+
+                case 37: // Izquierda
+                    vr = -3;
+                    event.preventDefault();
+                    break;
+
+                case 39: // Derecha
+                    vr = 3;
+                    event.preventDefault();
+                    break;
+
+                case 38: // Arriba
+                    thrust = 0.05;
+                    ship.showFlame = true;
+                    event.preventDefault();
+                    break;
+            }
+
+        });
+
+        window.addEventListener("keyup", function (event) {
+
+            if (event.keyCode === 37 ||
+                event.keyCode === 39) {
+                vr = 0;
+            }
+
+            if (event.keyCode === 38) {
+                thrust = 0;
+                ship.showFlame = false;
+            }
+
+        });
+
+        function dibujarFondo() {
+            // Dibujar la imagen de fondo
+            if (fondo.complete && fondo.naturalWidth > 0) {
+                context.drawImage(
+                    fondo,
+                    0, 0,
+                    canvas.width,
+                    canvas.height
+                );
+            } else {
+                // Fondo provisional mientras carga la imagen
+                context.fillStyle = "#17152f";
+                context.fillRect(
+                    0, 0,
+                    canvas.width,
+                    canvas.height
+                );
+            }
+        }
+
+
+        function dibujarFrame() {
+            requestAnimationFrame(dibujarFrame);
+
+            // Dibujar el fondo espacial
+            dibujarFondo();
+
+            // Rotar la nave
+            ship.rotation += vr * Math.PI / 180;
+            var angle = ship.rotation;
+
+            // Calcular la aceleración
+            ax = Math.sin(ship.rotation) * thrust;
+            ay = -Math.cos(ship.rotation) * thrust;
+
+            // Actualizar la velocidad
+            vx += ax;
+            vy += ay;
+
+            // Aplicar fricción
+            vx *= friction;
+            vy *= friction;
+
+            // Actualizar la posición
+            ship.x += vx;
+            ship.y += vy;
+
+            // Límites: la nave reaparece al otro lado
+            if (ship.x > canvas.width) {
+                ship.x = 0;
+            } else if (ship.x < 0) {
+                ship.x = canvas.width;
+            }
+
+            if (ship.y > canvas.height) {
+                ship.y = 0;
+            } else if (ship.y < 0) {
+                ship.y = canvas.height;
+            }
+
+            // Dibujar la nave
+            ship.draw(context);
+        }
+
+        dibujarFrame();
+
+    };
+    </script>
+
+    <div class="back-menu">
+        <a href="../index.html">Regresar al menú</a>
+    </div>
+
+</body>
+</html>
